@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const models = require("./models");
-models.sequelize
-  .sync()
+models.sequelize.sync({
+    force: true,
+logging: false
+  }) 
   .then(function () {
     console.log("> database has been synced");
   })
@@ -22,6 +24,6 @@ models.sequelize
       }
       res.send("<pre>" + JSON.stringify(airplane, undefined, 4) + "</pre>");
     });
-app.listen(3000, function () {
+app.listen(3300, function () {
   console.log("> express server has started");
 });

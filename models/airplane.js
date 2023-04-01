@@ -1,11 +1,12 @@
-"use strict";
-const { Model } = require("sequelize");
+const { Model } = require('@sequelize/core');
+
 module.exports = (sequelize, DataTypes) => {
   class Airplane extends Model {
     static associate(models) {
-      // define association here
+      this.FlightSchedules = this.hasMany(models.FlightSchedule);
     }
-  }
+  };
+
   Airplane.init({
     planeModel: {
       type: DataTypes.STRING,
@@ -28,5 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Airplane',
   });
+
   return Airplane;
 };
