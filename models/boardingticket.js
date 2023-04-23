@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   // Ensure that the seat the customer has requested is available
   BoardingTicket.beforeSave('checkSeat', async (ticket, options) => {
     const newSeat = ticket.getDataValue('seat');
-
+    const { transaction } = options
     if (ticket.changed('seat')) {
       const boardingTicketExists = await BoardingTicket.findOne({
         where: { seat: newSeat }
